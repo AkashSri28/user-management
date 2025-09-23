@@ -1,12 +1,58 @@
-# React + Vite
+User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Material UI web app for managing users.
+It supports listing, searching, adding, and editing users with a clean, responsive UI.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📋 List Users — fetch users from a dummy API and display them in a responsive list.
 
-## Expanding the ESLint configuration
+🔍 Search with Typeahead — search users by name, email, or phone with suggestions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+➕ Add User — create a new user with validation (Name, Email, Phone, Address).
+
+✏️ Edit User — update existing user details via the same form dialog.
+
+📂 User Details Page — click a name to see full user info (address, company, website, etc.).
+
+🖼️ Empty State — shows a Lottie animation when no users are found.
+
+🎨 Responsive UI — styled with Material UI and custom theming (light/dark mode ready).
+
+🔄 State Handling — Axios for API calls, local state for add/edit.
+
+Tech Stack
+
+React (Vite) – Frontend framework
+
+Material UI (MUI) – Components and theming
+
+React Router DOM – Client-side routing
+
+Axios – API requests
+
+Lottie React – Empty state animations
+
+Getting Started
+1. Clone the repo
+git clone https://github.com/<your-username>/user-management-dashboard.git
+cd user-management-dashboard
+
+2. Install dependencies
+npm install
+
+3. Run locally
+npm run dev
+
+
+App will be available at http://localhost:5173
+
+Project Structure
+src/
+ ├── api/                # Axios API wrappers
+ ├── assets/             # Static assets (Lottie JSON, images)
+ ├── components/         # Reusable components (dialogs, etc.)
+ ├── pages/              # Route pages (UsersPage, UserDetailPage)
+ ├── theme.js              # MUI theme setup
+ ├── App.jsx             # Routes and layout
+ └── main.jsx            # Entry point
