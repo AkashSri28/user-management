@@ -33,3 +33,14 @@ It supports listing, searching, adding, and editing users with a clean, responsi
 git clone https://github.com/<your-username>/user-management-dashboard.git
 cd user-management-dashboard
 ```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 2. Install dependencies
+```bash
+npm run dev
+```
+App will be available at http://localhost:5173
