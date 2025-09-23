@@ -3,6 +3,8 @@ import './App.css'
 import { Container, CssBaseline, ThemeProvider } from '@mui/material'
 import UsersPage from './pages/UsersPage'
 import { getTheme } from "./theme";
+import { Route, Routes } from 'react-router-dom';
+import UserDetails from './pages/UserDetails';
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -14,7 +16,10 @@ function App() {
       <Container sx={{
         py: {xs: 2, md: 3},
       }}>
-        <UsersPage/>
+        <Routes>
+          <Route path="/" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserDetails />} />
+        </Routes>
       </Container>
     </ThemeProvider>
   )

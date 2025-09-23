@@ -2,21 +2,27 @@ import { Close } from '@mui/icons-material';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, TextField } from '@mui/material';
 import React, { useEffect } from 'react'
 
-function AddUserDialog({open, onClose, handleAddUser}) {
-    const [userForm, setUserForm] = React.useState({
-        name: '',
-        email: '',
-        phone: '',
-        address: '',
-    });
+function AddUserDialog({open, type, onClose, onSubmit, defaultValues={
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+}}) {
+    const [userForm, setUserForm] = React.useState(defaultValues);
     const [errors, setErrors] = React.useState({});
+    const title = type === 'add' ? "Add New User" : "Edit User";
 
     useEffect(() => {
-        if (!open) {
-            setUserForm({name: '', email: '', phone: ''});
-            setErrors({});
+        if (open) {
+        setUserForm({
+            name: defaultValues?.name ?? "",
+            email: defaultValues?.email ?? "",
+            phone: defaultValues?.phone ?? "",
+            address: defaultValues?.address.city ?? "",
+        });
+        setErrors({});
         }
-    }, [open]);
+    }, [open, defaultValues]);
 
     const validate = () => {
         const newErrors = {};
@@ -34,14 +40,22 @@ function AddUserDialog({open, onClose, handleAddUser}) {
         }
         // Submit the form
         console.log("Submitting user:", userForm);
-        handleAddUser({...userForm, id: Date.now()}); 
+        const existingAddress = defaultValues?.address || {};
+        const payload = {
+            ...userForm,
+            address: {
+                ...existingAddress,
+                city: userForm.address,
+            }
+        }
+        onSubmit(payload);
         onClose();
     }
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
         <DialogTitle>
-            Add New User
+            {title}
             <IconButton
                 aria-label="close"
                 onClick={onClose}
@@ -54,7 +68,7 @@ function AddUserDialog({open, onClose, handleAddUser}) {
             <Stack spacing={2} sx={{mt: 1}}>    
                 <TextField
                     label="Name"   
-                    value={userForm.name}
+                    value={userForm?.name}
                     onChange={(e) => setUserForm({...userForm, name: e.target.value})}
                     error={!!errors.name}
                     helperText={errors.name}
@@ -62,21 +76,21 @@ function AddUserDialog({open, onClose, handleAddUser}) {
                 />
                 <TextField
                     label="Phone"
-                    value={userForm.phone}  
+                    value={userForm?.phone}  
                     onChange={(e) => setUserForm({...userForm, phone: e.target.value})}
                     error={!!errors.phone}
                     helperText={errors.phone}
                 />
                 <TextField
                     label="Email"  
-                    value={userForm.email}
+                    value={userForm?.email}
                     onChange={(e) => setUserForm({...userForm, email: e.target.value})}
                     error={!!errors.email}
                     helperText={errors.email}
                 />
                 <TextField
-                    label="Address"
-                    value={userForm.address}  
+                    label="Address (City)"
+                    value={userForm?.address}  
                     onChange={(e) => setUserForm({...userForm, address: e.target.value})}
                     error={!!errors.address}
                     helperText={errors.address}
