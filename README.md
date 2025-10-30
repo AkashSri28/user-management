@@ -39,8 +39,13 @@ cd user-management-dashboard
 npm install
 ```
 
-### 2. Install dependencies
+### 3. Run locally
 ```bash
 npm run dev
 ```
 App will be available at http://localhost:5173
+
+### 4. Run Unit Tests
+```bash
+npm run test
+```
