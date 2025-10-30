@@ -23,10 +23,9 @@ function UsersPage() {
         new Set(
             users.flatMap((u) => [u?.name, u?.email, u?.phone].filter(Boolean))
         )
-    ).slice(0, 10); 
+    ); 
 
     useEffect(() => {
-        // Fetch users from API
         (async () => {
             try {
                 const data = await getUsers();
@@ -152,8 +151,11 @@ function UsersPage() {
                                 </Link>
                                 
                                 <Tooltip title="Edit User" arrow>
-                                    <IconButton size='small' onClick={
-                                        () => setDialog({open: true, type: 'edit', user})
+                                    <IconButton 
+                                        size='small' 
+                                        aria-label="Edit User" 
+                                        onClick={
+                                            () => setDialog({open: true, type: 'edit', user})
                                     }>
                                         <Edit fontSize='small'/>
                                     </IconButton>

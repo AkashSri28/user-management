@@ -27,8 +27,16 @@ function AddUserDialog({open, type, onClose, onSubmit, defaultValues={
     const validate = () => {
         const newErrors = {};
         if (!userForm.name?.trim()) newErrors.name = "Name is required";
-        if (!userForm.email?.trim()) newErrors.email = "Email is required";
-        if (!userForm.phone?.trim()) newErrors.phone = "Phone is required";
+        if (!userForm.email?.trim()) {
+            newErrors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userForm.email)) {
+            newErrors.email = "Enter a valid email address";
+        }
+        if (!userForm.phone?.trim()) {
+            newErrors.phone = "Phone is required";
+        } else if (!/^\+?[0-9]{7,15}$/.test(userForm.phone)) {
+            newErrors.phone = "Enter a valid phone number";
+        }
         if (!userForm.address?.trim()) newErrors.address = "Address is required";
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
